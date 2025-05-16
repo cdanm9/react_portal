@@ -1,4 +1,10 @@
 {
-  "authenticationMethod": "none",
-  "routes": []
+  "authenticationMethod": "route",
+  "welcomeFile":"/vendor_toolpage",           
+  "logout": {
+    "logoutEndpoint": "/do/logout"
+  },    
+  "routes": [
+    
+  ]
 }

@@ -26,14 +26,27 @@ modules:
       - vendor_toolpage-content.zip
       name: vendor_toolpage
       target-path: resources/
+    - artifacts:
+      - po_dashboard-content.zip
+      name: po_dashboard
+      target-path: resources/    
 - name: vendor_toolpage
   type: html5
   path: vendor_toolpage
   build-parameters:
     builder: custom
     commands:
-    - npm install
-    - npm run build
+    - npm i react
+    # - npm run build
+    supported-platforms: []    
+- name: po_dashboard
+  type: html5
+  path: po_dashboard
+  build-parameters:
+    builder: custom
+    commands:
+    - npm i react
+    # - npm run build
     supported-platforms: []
 resources:
 - name: react_portal_html_repo_runtime
