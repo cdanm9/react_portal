@@ -3,3 +3,5 @@
 /resources/
 vendor_toolpage/node_modules/
 /vendor_toolpage/node_modules/  
+/po_dashboard/node_modules/      
+po_dashboard/node_modules/   
