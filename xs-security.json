@@ -1,5 +1,5 @@
 {
-  "xsappname": "react_portal",
+  "xsappname": "react_portal",   
   "tenant-mode": "dedicated",
   "description": "Security profile of called application",
   "scopes": [
