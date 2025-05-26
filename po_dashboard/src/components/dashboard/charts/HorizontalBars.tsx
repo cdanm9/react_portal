@@ -1,21 +1,6 @@
 import * as React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
-import { useEffect, useState } from 'react';
-import { vendorJSONData } from 'api'; // must be callable in the browser
-
-// Define the structure of each delivery item
-interface Delivery {
-  product: string;
-  quantity: number;
-}
-
-interface VendorDashboard {
-  upcoming_deliveries: Delivery[];
-}
-
-interface VendorData {
-  vendor_dashboard: VendorDashboard;
-}
+import { dataset, valueFormatter } from 'assets/vendorData';
 
 const chartSetting = {
   xAxis: [
@@ -23,29 +8,18 @@ const chartSetting = {
       label: 'Quantity',
     },
   ],
-  height: 320,
+  height: 300,
 };
 
-export default function HorizontalBars(): React.JSX.Element {
-  const [dataset, setDataset] = useState<Delivery[]>([]);
-
-  useEffect(() => {
-    async function fetchUpcomingData() {
-      const oVendorData: VendorData = await vendorJSONData();
-      const upcomingDeliveries = oVendorData.vendor_dashboard.upcoming_deliveries;
-      setDataset(upcomingDeliveries);
-    }
-
-    fetchUpcomingData();
-  }, []);
-
+export default function HorizontalBars() {  
   return (
     <BarChart
       dataset={dataset}
       yAxis={[{ scaleType: 'band', dataKey: 'product' }]}
-      series={[{ dataKey: 'quantity', label: 'Delivery Quantity' }]}
+      series={[{ dataKey: 'quantity', label: 'Quantity', valueFormatter }]}
       layout="horizontal"
       {...chartSetting}
     />
   );
 }
+

@@ -20,6 +20,7 @@ modules:
     parameters:
       content-target: true
   build-parameters:
+    ignore: [".env", "node_modules/"]
     build-result: resources
     requires:
     - artifacts:
@@ -36,13 +37,15 @@ modules:
   build-parameters:
     builder: custom
     commands:
-    - npm i react
+    - npm root
+    ignore: [".env", "node_modules/"]
     # - npm run build
     supported-platforms: []    
 - name: po_dashboard
   type: html5
   path: po_dashboard
   build-parameters:
+    ignore: [".env", "node_modules/"]
     builder: custom
     commands:
     - npm i react

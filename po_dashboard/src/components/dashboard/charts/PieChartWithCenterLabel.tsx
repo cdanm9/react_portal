@@ -1,11 +1,22 @@
-'use client';
-
 import * as React from 'react';
-import { useEffect, useState } from 'react';
 import { PieChart } from '@mui/x-charts/PieChart';
 import { useDrawingArea } from '@mui/x-charts/hooks';
 import { styled } from '@mui/material/styles';
-import { vendorJSONData } from 'api'; // Make sure this is client-safe
+
+const data=[{
+  "delivery_id": "DEL001",
+  "dispatch_date": "2024-12-07",
+  "expected_delivery_date": "2024-12-12",
+  "label": "In Transit",
+  "value":50
+},
+{
+  "delivery_id": "DEL002",
+  "dispatch_date": "2024-12-10",
+  "expected_delivery_date": "2024-12-15",
+  "label": "Pending",
+  "value":50
+}]
 
 const size = {
   width: 250,
@@ -19,7 +30,7 @@ const StyledText = styled('text')(({ theme }) => ({
   fontSize: 20,
 }));
 
-function PieCenterLabel({ children }) {
+function PieCenterLabel({ children }: { children: React.ReactNode }) {
   const { width, height, left, top } = useDrawingArea();
   return (
     <StyledText x={left + width / 2} y={top + height / 2}>
@@ -29,34 +40,9 @@ function PieCenterLabel({ children }) {
 }
 
 export default function PieChartWithCenterLabel() {
-  const [pieData, setPieData] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const oVendorData = await vendorJSONData();
-      const openDeliveries = oVendorData.vendor_dashboard.open_deliveries;
-
-      // Count how many deliveries per status
-      const statusCounts = openDeliveries.reduce((acc, curr) => {
-        acc[curr.status] = (acc[curr.status] || 0) + 1;
-        return acc;
-      }, {});
-
-      // Convert to format PieChart understands
-      const formattedData = Object.entries(statusCounts).map(([status, count]) => ({
-        label: status,
-        value: count,
-      }));
-
-      setPieData(formattedData);
-    }
-
-    fetchData();
-  }, []);
-
   return (
-    <PieChart series={[{ data: pieData, innerRadius: 80 }]} {...size}>
-      <PieCenterLabel></PieCenterLabel>
+    <PieChart series={[{ data, innerRadius: 80 }]} {...size}>
+      <PieCenterLabel>Order Status</PieCenterLabel>
     </PieChart>
   );
 }
