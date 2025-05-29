@@ -17,14 +17,14 @@ const router = createBrowserRouter([
             path: '',
             Component: Detail,
           },
-          // {
-          //   path: 'orders',
-          //   Component: Detail,   
-          // },
-          // {
-          //   path: 'detail',
-          //   Component: Detail,   
-          // },
+          {
+            path: 'orders',
+            Component: Detail,   
+          },
+          {
+            path: 'detail',
+            Component: Detail,   
+          },
         ],
       },
     ],

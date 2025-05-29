@@ -20,7 +20,7 @@ modules:
     parameters:
       content-target: true
   build-parameters:
-    ignore: [".env", "node_modules/"]
+    ignore: [".env", "node_modules/","po_dashboard/node_modules","vendor_toolpage/node_modules","vendor_user_master/node_modules"]
     build-result: resources
     requires:
     - artifacts:
@@ -48,7 +48,7 @@ modules:
     ignore: [".env", "node_modules/"]
     builder: custom
     commands:
-    - npm i react
+    - npm root
     # - npm run build
     supported-platforms: []
 resources:
