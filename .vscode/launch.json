@@ -1,0 +1,39 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run react_portal-vendor_toolpage",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/react-portal-approuter/node_modules/@sap/html5-repo-mock/index.js",
+      "args": [
+        "--standalone",
+        "/vendor_toolpage/index.html"
+      ],
+      "cwd": "${workspaceFolder}/vendor_toolpage/build",
+      "env": {
+        "PORT": "6004",
+        "run.config": "{\"handlerId\":\"html5_run_config_handler_id\",\"runnableId\":\"/home/user/projects/react_portal/vendor_toolpage\"}"
+      },
+      "envFile": "${workspaceFolder}/vendor_toolpage/.env2",
+      "preLaunchTask": "Run react_portal"
+    },
+    {
+      "name": "Run react_portal-vendor_user_master",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/react-portal-approuter/node_modules/@sap/html5-repo-mock/index.js",
+      "args": [
+        "--standalone",
+        "/vendor_user_master/index.html"
+      ],
+      "cwd": "${workspaceFolder}/vendor_user_master/build",
+      "env": {
+        "PORT": "6004",
+        "run.config": "{\"handlerId\":\"html5_run_config_handler_id\",\"runnableId\":\"/home/user/projects/react_portal/vendor_user_master\"}"
+      },
+      "envFile": "${workspaceFolder}/vendor_user_master/.env1",
+      "preLaunchTask": "Run react_portal"
+    }
+  ]
+}

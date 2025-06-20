@@ -1,59 +1,42 @@
-import vendorDashboardData from 'assets/vendorDashboard.json';
+import axios, { AxiosInstance } from 'axios';
 
-// ✅ Interfaces
-export interface OpenOrder {
-  order_id: string;
-  order_date: string;
-  product: string;
-  quantity: number;
-  due_date: string;
-  status: string;
-}
+const baseURL = 'IVEN_DB/odata/v4/fiori-user-master';
 
-export interface OpenDelivery {
-  delivery_id: string;
-  dispatch_date: string;
-  expected_delivery_date: string;
-  status: string;
-  percent: number;
-}
+const instance: AxiosInstance = axios.create({
+  baseURL,
+});
 
-export interface OpenInvoice {
-  invoice_id: string;
-  invoice_date: string;
-  amount: number;
-  due_date: string;
-  status: string;
-}
+export const getMasterIvenUsersData = async (
+  params: { $top: number; $skip: number } = { $top: 100, $skip: 0 }
+): Promise<any> => {
+  const { data } = await instance.get('/MasterIvenUsers', {
+    params,
+  });
 
-export interface UpcomingDelivery {
-  delivery_id: string;
-  product: string;
-  quantity: number;
-  expected_delivery_date: string;
-  status: string;
-}
-
-export interface GoodsReceipt {
-  grn_id: string;
-  date: string;
-  order_id: string;
-  delivery_id: string;
-  status: string;
-}
-
-export interface VendorDashboardData {
-  vendor_dashboard: {
-    open_orders: OpenOrder[];
-    open_deliveries: OpenDelivery[];
-    open_invoices: OpenInvoice[];
-    upcoming_deliveries: UpcomingDelivery[];
-    goods_receipt_status: GoodsReceipt[];
-  };
-}
-
-// ✅ Function that logs and returns the data
-export const vendorJSONData = async (): Promise<VendorDashboardData> => {
-  console.log("Vendor Dashboard Data:", vendorDashboardData);
-  return vendorDashboardData as VendorDashboardData;
+  // Return parsed data (handling various formats)
+  return data.d?.results || data.d || data.value;
 };
+
+export const getMasterUserRole= async (): Promise<any> => {
+  const { data } = await instance.get('/MasterUserRole', {
+  });
+
+  // Return parsed data (handling various formats)
+  return data.d?.results || data.d || data.value;
+};
+
+export const getMasterEntityCode= async (): Promise<any> => {
+  const { data } = await instance.get('/MasterEntityCode', {
+  });
+
+  // Return parsed data (handling various formats)
+  return data.d?.results || data.d || data.value;
+};
+
+// ✅ Step 4: Function to get user count
+export const getMasterIvenUsersCount = async (): Promise<number> => {
+  const { data } = await instance.get('/MasterIvenUsers/$count');
+  return data;
+};
+
+

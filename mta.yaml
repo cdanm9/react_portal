@@ -20,7 +20,7 @@ modules:
     parameters:
       content-target: true
   build-parameters:
-    ignore: [".env", "node_modules/","po_dashboard/node_modules","vendor_toolpage/node_modules","vendor_user_master/node_modules"]
+    ignore: [".env", "node_modules/","vendor_toolpage/node_modules","po_dashboard/node_modules","vendor_user_master/node_modules","vendor_req_appr/node_modules"]
     build-result: resources
     requires:
     - artifacts:
@@ -30,6 +30,14 @@ modules:
     - artifacts:
       - po_dashboard-content.zip
       name: po_dashboard
+      target-path: resources/    
+    - artifacts:
+      - vendor_user_master-content.zip
+      name: vendor_user_master
+      target-path: resources/    
+    - artifacts:
+      - vendor_req_appr-content.zip
+      name: vendor_req_appr
       target-path: resources/    
 - name: vendor_toolpage
   type: html5
@@ -44,6 +52,26 @@ modules:
 - name: po_dashboard
   type: html5
   path: po_dashboard
+  build-parameters:
+    ignore: [".env", "node_modules/"]
+    builder: custom
+    commands:
+    - npm root
+    # - npm run build
+    supported-platforms: []
+- name: vendor_user_master
+  type: html5
+  path: vendor_user_master
+  build-parameters:
+    ignore: [".env", "node_modules/"]
+    builder: custom
+    commands:
+    - npm root
+    # - npm run build
+    supported-platforms: []
+- name: vendor_req_appr
+  type: html5
+  path: vendor_req_appr
   build-parameters:
     ignore: [".env", "node_modules/"]
     builder: custom
